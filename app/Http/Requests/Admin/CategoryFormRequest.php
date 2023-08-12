@@ -46,18 +46,18 @@ class CategoryFormRequest extends FormRequest
             ],
 
             'meta_title' => [
-                'required',
+                'nullable',
                 'string',
                 'max:200',
             ],
 
             'meta_description' => [
-                'required',
+                'nullable',
                 'string',
             ],
 
             'meta_keyword' => [
-                'required',
+                'nullable',
                 'string',
             ],
 

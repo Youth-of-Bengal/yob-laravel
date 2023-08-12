@@ -21,7 +21,7 @@
                 @method('PUT')
 
                 <div class="mb-3">
-                    <label>Category Name</label>
+                    <label>Category Name <span class="text-danger fw-bold" >*</span></label>
                     <input type="text" name="name" value="{{ $category->name }}" class="form-control" />
                 </div>
                 <!-- <div class="mb-3">
@@ -29,17 +29,16 @@
                     <input type="text" name="slug" value="{{ $category->slug }}" class="form-control" />
                 </div> -->
                 <div class="mb-3">
-                    <label>Description</label>
+                    <label>Description <span class="text-danger fw-bold" >*</span></label>
                     <textarea name="description" rows="5" class="form-control">{{ $category->description }}</textarea>
                 </div>
                 <div class="mb-3 d-flex flex-column">
-                    <label>Image</label>
+                    <label>Image <span class="text-danger fw-bold" >*</span></label>
                     <img src="{{ URL::to('/')}}/uploads/category/{{$category->image }}" id="previousImg" width="200px" height="200px" class="mt-1 mb-3" alt="{{ $category->name }}">
                     <img id="newImg" src="#" alt="New Image" class="mt-1 mb-3" style="display: none;" width="200px" height="200px"  />
                     <input type="file" name="image" class="form-control" id="imgInp" />
                     
                     <script type="text/javascript">
-                        console.log("I'm running script")
                         const imgInp = document.getElementById('imgInp');
                         const previousImg = document.getElementById('previousImg');
                         const newImg = document.getElementById('newImg');

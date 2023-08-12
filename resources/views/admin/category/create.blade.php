@@ -31,8 +31,23 @@
                     <textarea name="description" rows="5" class="form-control"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label>Image</label>
-                    <input type="file" name="image" class="form-control" />
+                    <label>Image <span class="text-danger fw-bold" >*</span></label>
+                    <img id="newImg" src="#" alt="New Image" class="mt-1 mb-3" style="display: none;" width="200px" height="200px"  />
+                    <input type="file" name="image" class="form-control" id="imgInp" />
+
+                    <script type="text/javascript">
+                        const imgInp = document.getElementById('imgInp');
+                        // const previousImg = document.getElementById('previousImg');
+                        const newImg = document.getElementById('newImg');
+                        imgInp.onchange = evt => {
+                            const [file] = imgInp.files
+                            if (file) {
+                                // previousImg.style.display = "none";
+                                newImg.src = URL.createObjectURL(file)
+                                newImg.style.display = "flex"
+                            }
+                        }
+                    </script>
                 </div>
 
                 <h6>SEO Tags</h6>

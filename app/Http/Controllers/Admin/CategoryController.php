@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CategoryFormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -67,10 +68,17 @@ class CategoryController extends Controller
         $category->description = $data['description'];
 
         if ($request->hasfile('image')) {
+            $destination = 'uploads/category/'.$category->image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
             $file = $request->file('image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move('uploads/category/', $filename);
             $category->image = $filename;
+        }
+        else {
+            $data['image'] = $category->image; 
         }
         $category->meta_title = $data['meta_title'];
         $category->meta_description = $data['meta_description'];
@@ -82,5 +90,23 @@ class CategoryController extends Controller
         $category->update();
 
         return redirect('admin/category')->with('message', 'Category Updated Successfully');
+    }
+
+    public function destroy($category_id)
+    {
+        $category = Category::find($category_id);
+        if($category)
+        {
+            $destination = 'uploads/category/'.$category->image;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $category->delete();
+            return redirect('admin/category')->with('message', 'Category Deleted Successfully');
+        }
+        else
+        {
+            return redirect('admin/category')->with('message', 'No Category Id Found');
+        }
     }
 }

@@ -40,10 +40,10 @@ class CategoryFormRequest extends FormRequest
                 'required',
             ],
 
-            'image' => [
-                'nullable',
-                'mimes:jpeg,jpg,png',
-            ],
+            // 'image' => [
+            //     'required',
+            //     'mimes:jpeg,jpg,png',
+            // ],
 
             'meta_title' => [
                 'nullable',
@@ -63,14 +63,27 @@ class CategoryFormRequest extends FormRequest
 
             'navbar_status' => [
                 'nullable',
-                'boolean',
             ],
 
             'status' => [
                 'nullable',
-                'boolean',
             ],
         ];
+
+        $requestType = $this->input('request_type');
+
+        if ($requestType === 'create') {
+            $rules['image'] = [
+                'required',
+                'mimes:jpeg,jpg,png',
+            ];
+        }
+        else
+        {
+            $rules['image'] = [
+                'mimes:jpeg,jpg,png',
+            ];
+        };
 
         return $rules;
     }

@@ -19,7 +19,6 @@
             <form action="{{ url('admin/update-category/'.$category->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-
                 <div class="mb-3">
                     <label>Category Name <span class="text-danger fw-bold" >*</span></label>
                     <input type="text" name="name" value="{{ $category->name }}" class="form-control" />
@@ -75,7 +74,7 @@
                         <input type="checkbox" name="navbar_status" {{ $category->navbar_status == '1' ? 'checked' : '' }} />
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label>Status</label>
+                        <label>Hide Category</label>
                         <input type="checkbox" name="status" {{ $category->status == '1' ? 'checked' : '' }} />
                     </div>
                 </div>

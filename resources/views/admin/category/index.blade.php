@@ -22,7 +22,7 @@
                     // Set a timeout to hide the alert after 5 seconds (adjust the time as needed)
                     setTimeout(function() {
                         alertMessage.style.display = 'none';
-                    }, 1500); // 5000 milliseconds = 5 seconds
+                    }, 2500); // 5000 milliseconds = 5 seconds
                 });
             </script>
             @endif

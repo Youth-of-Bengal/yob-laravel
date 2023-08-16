@@ -22,4 +22,9 @@ Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function(){
     Route::get('edit-category/{category_id}', [App\Http\Controllers\Admin\CategoryController:: class, 'edit']);
     Route::put('update-category/{category_id}', [App\Http\Controllers\Admin\CategoryController:: class, 'update']);
     Route::get('delete-category/{category_id}', [App\Http\Controllers\Admin\CategoryController:: class, 'destroy']);
+
+    Route::get('/news', [App\Http\Controllers\Admin\NewsController:: class, 'index']);
+    Route::get('/add-news', [App\Http\Controllers\Admin\NewsController:: class, 'create']);
+    Route::post('/add-news', [App\Http\Controllers\Admin\NewsController:: class, 'store'])->name('add-news');
+
 });

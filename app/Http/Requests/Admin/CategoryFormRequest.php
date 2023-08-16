@@ -30,61 +30,7 @@ class CategoryFormRequest extends FormRequest
                 'max:200',
             ],
 
-            'slug' => [
-                'nullable',
-                'string',
-                'max:200',
-            ],
-
-            'description' => [
-                'required',
-            ],
-
-            // 'image' => [
-            //     'required',
-            //     'mimes:jpeg,jpg,png',
-            // ],
-
-            'meta_title' => [
-                'nullable',
-                'string',
-                'max:200',
-            ],
-
-            'meta_description' => [
-                'nullable',
-                'string',
-            ],
-
-            'meta_keyword' => [
-                'nullable',
-                'string',
-            ],
-
-            'navbar_status' => [
-                'nullable',
-            ],
-
-            'status' => [
-                'nullable',
-            ],
         ];
-
-        $requestType = $this->input('request_type');
-
-        if ($requestType === 'create') {
-            $rules['image'] = [
-                'required',
-                'mimes:jpeg,jpg,png',
-            ];
-        }
-        else
-        {
-            $rules['image'] = [
-                'mimes:jpeg,jpg,png',
-            ];
-        };
-
         return $rules;
     }
 }

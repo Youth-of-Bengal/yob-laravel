@@ -16,6 +16,9 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <!-- select2 -->
+    @yield('styles')
 
 </head>
 
@@ -36,6 +39,7 @@
 
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    @yield('scripts')
 </body>
 
 </html>

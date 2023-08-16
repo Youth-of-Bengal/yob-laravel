@@ -9,16 +9,43 @@
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            data-bs-target="#collapseCategories" aria-expanded="false" aria-controls="collapseCategories">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-tags"></i></i></div>
                             Category
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                        <div class="collapse" id="collapseCategories" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ url('admin/add-category') }}">Add Category</a>
                                 <a class="nav-link" href="{{ url('admin/category') }}">View Category</a>
+                            </nav>
+                        </div>
+
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseNews" aria-expanded="false" aria-controls="collapseNews">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-newspaper"></i></div>
+                            News
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseNews" aria-labelledby="headingTwo"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{ url('admin/add-news') }}">Add News</a>
+                                <a class="nav-link" href="{{ url('admin/news') }}">View News</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseGallery" aria-expanded="false" aria-controls="collapseGallery">
+                            <div class="sb-nav-link-icon"><i class="fa-regular fa-image"></i></div>
+                            Gallery
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseGallery" aria-labelledby="headingTwo"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{ url('admin/add-album') }}">Add Album</a>
+                                <a class="nav-link" href="{{ url('admin/albums') }}">All Albums</a>
                             </nav>
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
@@ -27,7 +54,7 @@
                             Pages
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingThree"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"

@@ -1,12 +1,12 @@
 @extends('layouts.master')
-@section('title', 'Category')
+@section('title', 'News')
 
 @section('content')
 <div class="container-fluid px-4">
     <div class="card mt-4">
         <div class="card-header">
-            <h4>View Category
-                <a href="{{ url('admin/add-category') }}" class="btn btn-primary btn-sm float-end">Add Category</a>
+            <h4>View News
+                <a href="{{ url('admin/add-news') }}" class="btn btn-primary btn-sm float-end">Add News</a>
             </h4>
         </div>
         <div class="card-body">
@@ -31,21 +31,31 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Category Name</th>
+                        <th>News Title</th>
+                        <th>Cover Image</th>
+                        <th>Published Date</th>
+                        <th>Status</th>
+                        <th>Categories</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($category as $item)
+                    @foreach($news as $item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->title }}</td>
                         <td>
-                            <a href="{{ url('admin/edit-category/'.$item->id) }}" class="btn btn-success">Edit</a>
+                            <img src="{{ URL::to('/')}}/uploads/news/{{$item->image }}" width="50px" height="50px" alt="{{ $item->name }}">
+                        </td>
+                        <td>{{ $item->created_at }}</td>
+                        <td>{{ $item->is_draft == false ? 'Draft': 'Published' }}</td>
+                        <td>{{ $item->categories }}</td>
+                        <td>
+                            <a href="{{ url('admin/edit-news/'.$item->id) }}" class="btn btn-success">Edit</a>
                         </td>
                         <td>
-                            <a href="{{ url('admin/delete-category/'.$item->id) }}" class="btn btn-danger">Delete</a>
+                            <a href="{{ url('admin/delete-news/'.$item->id) }}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     @endforeach

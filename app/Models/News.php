@@ -19,6 +19,7 @@ class News extends Model
         'meta_title',
         'meta_description',
         'meta_keyword',
+        'categories',
         'publish_date',
         'is_draft'
     ];

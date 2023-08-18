@@ -45,7 +45,7 @@
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ url('admin/add-album') }}">Add Album</a>
-                                <a class="nav-link" href="{{ url('admin/albums') }}">All Albums</a>
+                                <a class="nav-link" href="{{ url('admin/all-album') }}">All Albums</a>
                             </nav>
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"

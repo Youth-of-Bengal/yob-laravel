@@ -36,6 +36,7 @@ class NewsController extends Controller
     public function store(NewsFormRequest $request)
     {
         $data = $request->validated();
+        dd($data);
 
         $news = new News;
         $news->title = $data['title'];

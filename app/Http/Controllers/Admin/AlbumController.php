@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AlbumFormRequest;
 use App\Models\Album;
 use App\Models\AlbumImages;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AlbumController extends Controller
 {
@@ -14,12 +16,6 @@ class AlbumController extends Controller
     {
         $albums = Album::all();
         return view('admin.gallery.index', compact('albums'));
-        // $allImages = [];
-        // foreach ($albums as $key => $album) {
-        //     $albumImages = Album::find($album->id)->getImages;
-        //     $allImages[$key] = $albumImages;
-        // }
-        // dd($allImages);
     }
 
     public function create()
@@ -38,7 +34,63 @@ class AlbumController extends Controller
                 'filename' => $filename
             ]);
         }
-        // dd($album);
         return redirect('admin/all-album')->with('message', 'Album Added Successfully');
+    }
+
+    public function viewAlbum($album_id)
+    {
+        $album = Album::findOrFail($album_id);
+        $allImages = $album->getImages;
+        return view('admin.gallery.view', compact('album', 'allImages'));
+    }
+
+    public function edit($album_id)
+    {
+        $album = Album::findOrFail($album_id);
+        $allImages = $album->getImages;
+        return view('admin.gallery.edit', compact('album', 'allImages'));
+    }
+
+    public function update($request)
+    {
+        // $data = $request->validated();
+        dd($request);
+
+        // $album = Album :: find($album_id);
+        // $album->album_name = $data['album_name'];
+
+
+        // foreach ($request->images as $image) {
+        //     $album_name = $album->album_name; 
+        //     $filename = $image->store('/public/gallery/'.$album_name.'/');
+        //     AlbumImages::create([
+        //         'album_id' => $album->id,
+        //         'filename' => $filename
+        //     ]);
+        // }
+
+        // $album->update();
+
+        // return redirect('admin/album')->with('message', 'Album Updated Successfully');
+    }
+
+    public function destroy($album_id)
+    {
+        $album = Album::find($album_id);
+        if($album)
+        {
+            $allImages=$album->getImages;
+            $album_name = $album->album_name;
+            Storage::deleteDirectory('/public/gallery/'.$album_name);
+            foreach ($allImages as $image) {
+                $image->delete();
+            }
+            $album->delete();
+            return redirect('admin/all-album')->with('message', 'Album Deleted Successfully');
+        }
+        else
+        {
+            return redirect('admin/all-album')->with('message', 'No Album Id Found');
+        }
     }
 }

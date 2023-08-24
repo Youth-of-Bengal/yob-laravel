@@ -79,14 +79,14 @@
                                             <h3 class="card-text">{{ $album->album_name }}</h3>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div class="btn-group">
-                                                    <a href="{{ url('admin/view-album/' . $album->id) }}"><button
+                                                    <a href="{{ route('albums.view', ['album_id' => $album->id]) }}"><button
                                                             type="button"
                                                             class="btn btn-sm btn-primary me-2">View</button></a>
                                                     <a href="{{ url('admin/edit-album/' . $album->id) }}"><button
                                                             type="button"
                                                             class="btn btn-sm btn-outline-secondary">Edit</button></a>
                                                 </div>
-                                                <a href="{{ url('admin/delete-news/' . $album->id) }}"
+                                                <a href="{{ url('admin/delete-album/' . $album->id) }}"
                                                     class="text-danger"><i class="fa-solid fa-trash-can"></i></a>
                                             </div>
                                         </div>

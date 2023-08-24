@@ -30,4 +30,8 @@ Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function(){
     Route::get('/all-album', [App\Http\Controllers\Admin\AlbumController:: class, 'index']);
     Route::get('/add-album', [App\Http\Controllers\Admin\AlbumController:: class, 'create']);
     Route::post('/add-album', [App\Http\Controllers\Admin\AlbumController:: class, 'store']);
+    Route::get('/view-album/{album_id}', [App\Http\Controllers\Admin\AlbumController:: class, 'viewAlbum'])->name('albums.view');
+    Route::get('edit-album/{album_id}', [App\Http\Controllers\Admin\AlbumController:: class, 'edit']);
+    Route::put('update-album/{album_id}', [App\Http\Controllers\Admin\AlbumController:: class, 'update']);
+    Route::get('delete-album/{album_id}', [App\Http\Controllers\Admin\AlbumController:: class, 'destroy']);
 });

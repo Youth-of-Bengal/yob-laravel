@@ -23,11 +23,21 @@ class AlbumFormRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'album_name' => 'required|unique:albums',
-            'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,jpg,png,webp,avif|max:2000'
-        ];
+        $requestType = $this->input('request_type');
+        if ($requestType === 'create') {
+            $rules = [
+                'album_name' => 'required|unique:albums',
+                'images' => 'required|array',
+                'images.*' => 'image|mimes:jpeg,jpg,png,webp,avif|max:2000'
+            ];
+        }
+        else {
+            $rules = [
+                'album_name' => 'required',
+                'images' => 'array',
+                'images.*' => 'image|mimes:jpeg,jpg,png,webp,avif|max:2000'
+            ];
+        }
 
         return $rules;
     }

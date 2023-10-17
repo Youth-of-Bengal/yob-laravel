@@ -24,7 +24,7 @@ class News extends Model
         'is_draft'
     ];
 
-    public function categories(): BelongsToMany
+    public function categories()
     {
         return $this->belongsToMany(Category::class);
     }

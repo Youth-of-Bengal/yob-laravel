@@ -14,7 +14,7 @@ class Category extends Model
         'name',
     ];
 
-    public function news():BelongsToMany
+    public function news()
     {
         return $this->belongsToMany(News::class);
     }

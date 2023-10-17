@@ -11,17 +11,17 @@
             filter: brightness(50%);
         }
 
-        .imageContainer{
+        .imageContainer {
             position: relative;
         }
 
         .middle {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-      }
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
 
         .text {
             color: white;
@@ -42,19 +42,6 @@
             <div class="card-body">
                 @if (session('message'))
                     <div class="alert alert-success" id="alertMessage">{{ session('message') }}</div>
-
-                    <script type="text/javascript">
-                        // Wait for the document to be ready
-                        document.addEventListener("DOMContentLoaded", function() {
-                            // Get the alert element by its ID
-                            const alertMessage = document.getElementById('alertMessage');
-
-                            // Set a timeout to hide the alert after 5 seconds (adjust the time as needed)
-                            setTimeout(function() {
-                                alertMessage.style.display = 'none';
-                            }, 2500); // 5000 milliseconds = 5 seconds
-                        });
-                    </script>
                 @endif
 
                 <div class="album py-5 bg-light">
@@ -68,9 +55,10 @@
                                             $allImages = App\Models\Album::find($album->id)->getImages;
                                         @endphp
                                         <div class="imageContainer">
-                                            <img src="{{ URL::to('/') }}{{ Illuminate\Support\Facades\Storage::url($allImages[0]->filename) }}" class="thumbnailImage" alt="{{ $album->album_name }}">
+                                            <img src="{{ URL::to('/') }}{{ Illuminate\Support\Facades\Storage::url($allImages[0]->filename) }}"
+                                                class="thumbnailImage" alt="{{ $album->album_name }}">
                                             <div class="middle">
-                                                <p class="text">+{{ sizeof($allImages) }}</p>
+                                                <p class="text">+{{ sizeof($allImages)-1 }}</p>
                                             </div>
                                         </div>
 
@@ -86,8 +74,32 @@
                                                             type="button"
                                                             class="btn btn-sm btn-outline-secondary">Edit</button></a>
                                                 </div>
-                                                <a href="{{ url('admin/delete-album/' . $album->id) }}"
-                                                    class="text-danger"><i class="fa-solid fa-trash-can"></i></a>
+                                                <a data-bs-toggle="modal" data-bs-target="#deleteModal{{ $album->id }}"
+                                                    class="btn text-danger"><i class="fa-solid fa-trash-can"></i></a>
+                                                <div class="modal fade" id="deleteModal{{ $album->id }}" tabindex="-1"
+                                                    aria-labelledby="deleteModalLabel{{ $album->id }}"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"
+                                                                    id="deleteModalLabel{{ $album->id }}">Confirm
+                                                                    Deletion</h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Are you sure you want to delete this album?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Cancel</button>
+                                                                <a href="{{ url('admin/delete-album/' . $album->id) }}"
+                                                                    class="btn btn-danger">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -96,15 +108,22 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
-
-
-
-
     </div>
 
+@endsection
+@section('scripts')
+    <script>
+        // Wait for the document to be ready
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the alert element by its ID
+            const alertMessage = document.getElementById('alertMessage');
+
+            // Set a timeout to hide the alert after 5 seconds (adjust the time as needed)
+            setTimeout(function() {
+                alertMessage.style.display = 'none';
+            }, 2500); // 5000 milliseconds = 5 seconds
+        });
+    </script>
 @endsection

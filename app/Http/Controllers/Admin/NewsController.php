@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -36,19 +37,16 @@ class NewsController extends Controller
     public function store(NewsFormRequest $request)
     {
         $data = $request->validated();
-        dd($data);
 
         $news = new News;
         $news->title = $data['title'];
         $news->subtitle = $data['subtitle'];
-        // $news->slug = $data['slug'];
         $news->slug = Str::slug($data['title']);
         $news->description = $data['description'];
 
         if ($request->hasfile('image')) {
             $file = $request->file('image');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move('uploads/news/', $filename);
+            $filename = $file->store('/public/news/');
             $news->image = $filename;
         }
         $news->meta_title = $data['meta_title'];
@@ -56,27 +54,53 @@ class NewsController extends Controller
         $news->meta_keyword = $data['meta_keyword'];
         $formattedDate = Carbon::parse($data['publish_date'])->format('Y-m-d');
         $news->publish_date= $formattedDate;
-        // $news->publish_date= $data['publish_date'];
 
-        $news->categories()->attach($request->category_id);
-
-        $news->is_draft = true ;
+        $action = $request->input('action');
+        if ($action === 'save_draft') {
+            $news->is_draft = true;
+        } else {
+            $news->is_draft = false;
+        }
         $news->save();
+
+        $allCategoryIds = [];
+        $allCategoryNames = $request->tags;
+        foreach ($allCategoryNames as $categoryName) {
+            $category = Category::where('name', $categoryName)->first();
+            if ($category) {
+                $allCategoryIds[] = $category->id;
+            } 
+        }
+        $news->categories()->attach($allCategoryIds);
 
         return redirect('admin/news')->with('message', 'News Added Successfully');
     }
 
-    public function edit($category_id)
+    public function upload (Request $request)
     {
-        $news = News::find($category_id);
-        return view('admin.news.edit', compact('news'));
+        // dd($request->all());
+        if ($request->hasfile('upload'))
+        {
+            $file = $request->file('upload');
+            $filename = $file->store('/public/news/');
+            $storageUrl = Storage::url($filename);
+            $url = asset($storageUrl);
+            return response()->json(['filename'=>$filename, 'uploaded'=>1, 'url'=>$url]);
+        }
     }
 
-    public function update(NewsFormRequest $request, $category_id)
+    public function edit($news_id)
+    {
+        $news = News::find($news_id);
+        $categories=Category::all();
+        return view('admin.news.edit', compact('news', 'categories'));
+    }
+
+    public function update(NewsFormRequest $request, $news_id)
     {
         $data = $request->validated();
 
-        $news = News :: find($category_id);
+        $news = News :: find($news_id);
         $news->name = $data['name'];
         // $news->slug = $data['slug'];
         $news->slug = Str::slug($data['name']);
@@ -104,14 +128,14 @@ class NewsController extends Controller
         return redirect('admin/news')->with('message', 'News Updated Successfully');
     }
 
-    public function destroy($category_id)
+    public function destroy($news_id)
     {
-        $news = News::find($category_id);
+        $news = News::find($news_id);
         if($news)
         {
-            $destination = 'uploads/news/'.$news->image;
-            if(File::exists($destination)){
-                File::delete($destination);
+            $destination = $news->image;
+            if(Storage::exists($destination)){
+                Storage::delete($destination);
             }
             $news->delete();
             return redirect('admin/news')->with('message', 'News Deleted Successfully');

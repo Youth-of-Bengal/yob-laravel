@@ -51,27 +51,41 @@ class AlbumController extends Controller
         return view('admin.gallery.edit', compact('album', 'allImages'));
     }
 
-    public function update($request)
+    public function deleteSingleImage($image_id) {
+        $albumImage = AlbumImages::find($image_id);
+        if ($albumImage) {
+            $destination = $albumImage->filename; // Assuming 'filename' is the column name in the table
+            if (Storage::exists($destination)) {
+                Storage::delete($destination);
+                $albumImage->delete();
+            }
+            return response()->json(['success' => true]);
+        }
+        else {
+            return response()->json(['success' => false]);
+        }
+        
+    }
+
+    public function update(AlbumFormRequest $request, $album_id)
     {
-        // $data = $request->validated();
-        dd($request);
+        $data = $request->validated();
 
-        // $album = Album :: find($album_id);
-        // $album->album_name = $data['album_name'];
+        $album = Album :: find($album_id);
+        $album->album_name = $data['album_name'];
 
+        foreach ($request->images as $image) {
+            $album_name = $album->album_name; 
+            $filename = $image->store('/public/gallery/'.$album_name.'/');
+            AlbumImages::create([
+                'album_id' => $album->id,
+                'filename' => $filename
+            ]);
+        }
 
-        // foreach ($request->images as $image) {
-        //     $album_name = $album->album_name; 
-        //     $filename = $image->store('/public/gallery/'.$album_name.'/');
-        //     AlbumImages::create([
-        //         'album_id' => $album->id,
-        //         'filename' => $filename
-        //     ]);
-        // }
+        $album->update();
 
-        // $album->update();
-
-        // return redirect('admin/album')->with('message', 'Album Updated Successfully');
+        return redirect('admin/all-album')->with('message', 'Album Updated Successfully');
     }
 
     public function destroy($album_id)

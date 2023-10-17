@@ -21,8 +21,30 @@
             <div class="btn-group">
                 <a href="{{ url('admin/edit-album/' . $album->id) }}"><button type="button"
                         class="btn btn-sm btn-primary me-2">Edit Album</button></a>
-                <a href="{{ url('admin/delete-album/' . $album->id) }}"><button type="button"
-                        class="btn btn-sm btn-danger me-2">Delete Album</button></a>
+                <a data-bs-toggle="modal" data-bs-target="#deleteModal{{ $album->id }}"
+                    class="btn text-danger deleteLink p-0"><button type="button" class="btn btn-sm btn-danger me-2">Delete
+                        Album</button></a>
+                <div class="modal fade" id="deleteModal{{ $album->id }}" tabindex="-1"
+                    aria-labelledby="deleteModalLabel{{ $album->id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel{{ $album->id }}">Confirm
+                                    Deletion</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete this album?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <a href="{{ url('admin/delete-album/' . $album->id) }}"><button type="button"
+                                        class="btn btn-sm btn-danger me-2">Delete</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <a href="{{ url('admin/all-album/') }}"><button type="button" class="btn btn-sm btn-outline-secondary">All
                         Albums</button></a>
             </div>

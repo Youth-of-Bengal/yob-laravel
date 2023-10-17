@@ -39,6 +39,9 @@ class NewsFormRequest extends FormRequest
             'description' => [
                 'required',
             ],
+            'categories' => [
+                'required'
+            ],
 
             'meta_title' => [
                 'nullable',
@@ -62,18 +65,39 @@ class NewsFormRequest extends FormRequest
 
         ];
 
+        // $requestType = $this->input('request_type');
+
+        // if ($requestType === 'create') {
+        //     $rules['image'] = [
+        //         'required',
+        //         'mimes:jpeg,jpg,png',
+        //     ];
+        // }
+        // else
+        // {
+        //     $rules['image'] = [
+        //         'mimes:jpeg,jpg,png',
+        //     ];
+        // };
+
         $requestType = $this->input('request_type');
 
         if ($requestType === 'create') {
-            $rules['image'] = [
-                'required',
-                'mimes:jpeg,jpg,png',
+
+            $rules = [
+                'name' => 'required|unique:project|string|max:200',
+                'image' => 'required|mimes:jpeg,jpg,png',
+                'description' => 'required',
+                'coordinator' => 'required|string|max:400',
             ];
         }
         else
         {
-            $rules['image'] = [
-                'mimes:jpeg,jpg,png',
+            $rules = [
+                'name' => 'required|string|max:200',
+                'image' => 'mimes:jpeg,jpg,png',
+                'description' => 'required',
+                'coordinator' => 'required|string|max:400',
             ];
         };
 

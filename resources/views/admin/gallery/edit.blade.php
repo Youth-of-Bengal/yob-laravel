@@ -14,7 +14,7 @@
         }
 
         output .image {
-            height: 150px;
+            height: 180px;
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
             overflow: hidden;
@@ -26,17 +26,41 @@
             width: 100%;
         }
 
+        .prevImages {
+            width: auto !important;
+        }
+
         output .image span {
             position: absolute;
-            top: -4px;
+            top: 4px;
             right: 4px;
             cursor: pointer;
             font-size: 22px;
-            color: white;
+            color: black;
+            padding: 0 8px;
+            border-radius: 2px;
+            background: white;
+        }
+
+        .deleteLink {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 5px 10px;
+            background: white;
+            border: red;
+        }
+
+        .deleteLink:hover {
+            background: rgb(255, 82, 82);
+            color: white !important;
         }
 
         output .image span:hover {
-            opacity: 0.8;
+            background: black;
+            color: white;
         }
 
         output .span--hidden {
@@ -67,19 +91,40 @@
                         <label>Album Name <span class="text-danger fw-bold">*</span></label>
                         <input type="text" name="album_name" value="{{ $album->album_name }}" class="form-control" />
                     </div>
-                    @php
-                        $prevImagePaths = [];
-                        $albumName = $album->album_name;
-                        foreach ($allImages as $image) {
-                            $prevImagePaths[] = Illuminate\Support\Facades\Storage::url($image->filename);
-                        }
-                        $prevImagePathsJSONString = json_encode($prevImagePaths);
-                    @endphp
                     <div class="mb-3">
                         <label id="prevImageLevel">Album's Images</label>
-                        <input type="hidden" name="" id="prevImageInput"
-                            data-previmagepaths="{{ $prevImagePathsJSONString }}" data-albumname="{{ $albumName }}">
-                        <output style="display:none;" id="prevOutput"></output>
+                        <output id="prevOutput">
+                            @foreach ($allImages as $index => $image)
+                                <div class="image">
+                                    <img src="{{ Illuminate\Support\Facades\Storage::url($image->filename) }}"
+                                        alt="{{ $album->album_name }}-{{ $index + 1 }}" class="prevImages">
+                                    <a data-bs-toggle="modal" data-bs-target="#deleteModal{{ $image->id }}"
+                                        class="btn text-danger deleteLink"><i class="fa-solid fa-trash-can"></i></a>
+                                    <div class="modal fade" id="deleteModal{{ $image->id }}" tabindex="-1"
+                                        aria-labelledby="deleteModalLabel{{ $image->id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteModalLabel{{ $image->id }}">Confirm
+                                                        Deletion</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to delete this image?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Cancel</button>
+                                                    <a onclick="deletePrevImg({{ $index }}, {{ $image->id }})"
+                                                        class="btn btn-danger">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </output>
                     </div>
                     <div class="mb-3">
                         <label>Add New Image(s) <span class="text-danger fw-bold">*</span></label>
@@ -88,86 +133,6 @@
                         <output style="display:none;" id="newOutput"></output>
                     </div>
 
-                    <script>
-                        const newOutput = document.getElementById("newOutput")
-                        const prevOutput = document.getElementById("prevOutput")
-                        const newImageInput = document.getElementById("newImageInput")
-                        const prevImageInput = document.getElementById("prevImageInput")
-                        const prevImageLevel = document.getElementById("prevImageLevel")
-                        const prevImagePathsJSONString = prevImageInput.dataset.previmagepaths
-                        let prevImagePaths = JSON.parse(prevImagePathsJSONString)
-                        let albumName = prevImageInput.dataset.albumname
-                        let newImagesArray = []
-
-                        function deleteImage(index) {
-                            const dt = new DataTransfer()
-                            const newImageInput = document.getElementById("newImageInput")
-                            const {
-                                files
-                            } = newImageInput
-                            for (let i = 0; i < files.length; i++) {
-                                const file = files[i]
-                                if (index !== i) {
-                                    dt.items.add(file)
-                                }
-                            }
-                            newImageInput.files = dt.files
-                            newImagesArray.splice(index, 1)
-                            displayImages()
-                        }
-
-                        function deletePrevImage(index) {
-                            prevImagePaths.splice(index, 1)
-                            displayPrevImages()
-                        }
-
-
-                        function displayImages() {
-                            let images = ""
-
-                            newImagesArray.forEach((image, index) => {
-                                images += `<div class="image">
-                                            <img src="${URL.createObjectURL(image)}" alt="image">
-                                            <span onclick="deleteImage(${index})">&times;</span>
-                                            </div>`
-                            })
-                            newOutput.innerHTML = images
-                        }
-
-                        newImageInput.addEventListener("change", () => {
-                            newOutput.style.display = "flex"
-                            const files = newImageInput.files
-                            newImagesArray = []
-                            for (let i = 0; i < files.length; i++) {
-                                newImagesArray.push(files[i])
-                            }
-                            displayImages()
-                        })
-
-                        function displayPrevImages() {
-                            let prevImages = ""
-                            if (prevImagePaths.length > 0) {
-                                prevImagePaths.forEach((imgPath, index) => {
-                                    prevImages += `<div class="image">
-                                            <img src="${imgPath}" alt="image">
-                                            <span onclick="deletePrevImage(${index})">&times;</span>
-                                            </div>`
-                                })
-                                prevImageInput.name = JSON.stringify(prevImagePaths)
-                            }
-                            else {
-                                prevOutput.style.display = "none"
-                                prevImageLevel.style.display = "none"
-                                prevImageInput.name = JSON.stringify(prevImagePaths)
-                            }
-                            prevOutput.innerHTML = prevImages
-                        }
-                        window.addEventListener("load", () => {
-                            prevOutput.style.display = "flex"
-                            displayPrevImages()
-                        })
-                    </script>
-
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-primary">Update Album</button>
                     </div>
@@ -175,5 +140,73 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        const newOutput = document.getElementById("newOutput")
+        const prevOutput = document.getElementById("prevOutput")
+        const newImageInput = document.getElementById("newImageInput")
+        const prevImages = document.getElementsByClassName("prevImages")
+        var base_url = window.location.origin + '/';
+        let newImagesArray = []
 
+        function deleteImage(index) {
+            const dt = new DataTransfer()
+            const newImageInput = document.getElementById("newImageInput")
+            const {
+                files
+            } = newImageInput
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i]
+                if (index !== i) {
+                    dt.items.add(file)
+                }
+            }
+            newImageInput.files = dt.files
+            newImagesArray.splice(index, 1)
+            displayImages()
+        }
+
+        function displayImages() {
+            let images = ""
+            newImagesArray.forEach((image, index) => {
+                images += `<div class="image">
+                        <img src="${URL.createObjectURL(image)}" alt="image">
+                        <span onclick="deleteImage(${index})">&times;</span>
+                        </div>`
+            })
+            newOutput.innerHTML = images
+        }
+
+        newImageInput.addEventListener("change", () => {
+            newOutput.style.display = "flex"
+            const files = newImageInput.files
+            newImagesArray = []
+            for (let i = 0; i < files.length; i++) {
+                newImagesArray.push(files[i])
+            }
+            displayImages()
+        })
+
+        function deletePrevImg(index, imageId) {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "POST",
+                url: base_url + 'admin/delete-single-image/' + imageId,
+                data: {
+                    image_id: imageId
+                },
+                success: function(response) {
+                    if (response.success) {
+                        $('#deleteModal' + imageId).modal('hide');
+                        prevImages[index].style.display = 'none';
+                    } else {
+                        alert("Deletion failed!");
+                    }
+                }
+            });
+        }
+    </script>
 @endsection

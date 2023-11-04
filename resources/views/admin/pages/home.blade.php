@@ -16,7 +16,7 @@
                     </div>
                 @endif
 
-                <form action="{{ url('admin/add-project') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('admin/pages/home/store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="request_type" value="create">
                     <div class="mb-3">

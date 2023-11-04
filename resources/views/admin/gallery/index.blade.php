@@ -111,8 +111,8 @@
             </div>
         </div>
     </div>
-
 @endsection
+
 @section('scripts')
     <script>
         // Wait for the document to be ready

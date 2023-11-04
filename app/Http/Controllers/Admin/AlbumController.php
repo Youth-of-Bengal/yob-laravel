@@ -67,21 +67,23 @@ class AlbumController extends Controller
         
     }
 
-    public function update(AlbumFormRequest $request, $album_id)
+    public function update(Request $request, $album_id)
     {
-        $data = $request->validated();
+        $data = $request->all();
 
         $album = Album :: find($album_id);
         $album->album_name = $data['album_name'];
 
-        foreach ($request->images as $image) {
-            $album_name = $album->album_name; 
-            $filename = $image->store('/public/gallery/'.$album_name.'/');
-            AlbumImages::create([
-                'album_id' => $album->id,
-                'filename' => $filename
-            ]);
-        }
+        if(isset($request->images)){
+            foreach ($request->images as $image) {
+                $album_name = $album->album_name; 
+                $filename = $image->store('/public/gallery/'.$album_name.'/');
+                AlbumImages::create([
+                    'album_id' => $album->id,
+                    'filename' => $filename
+                ]);
+            }
+        }        
 
         $album->update();
 

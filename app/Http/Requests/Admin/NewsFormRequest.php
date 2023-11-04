@@ -23,47 +23,81 @@ class NewsFormRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'title' => [
-                'required',
-                'string',
-                'max:200',
-            ],
+        $requestType = $this->input('request_type');
 
-            'subtitle' => [
-                'nullable',
-                'string',
-                'max:200',
-            ],
+        if ($requestType === 'create') {
 
-            'description' => [
-                'required',
-            ],
-            'categories' => [
-                'required'
-            ],
+            $rules = [
+                'title' => 'required|unique:news|string|max:200',
+                'subtitle' => 'nullable|string|max:200',
+                'description' => 'required',
+                'tags' => 'required',
+                'meta_title' => 'nullable|string|max:200',
+                'meta_description' => 'nullable|string',
+                'meta_keyword' => 'nullable|string',
+                'publish_date' => 'required',
+                'image' => 'required|mimes:jpeg,jpg,png',
+            ];
+        }
+        else
+        {
+            $rules = [
+                'image' => 'mimes:jpeg,jpg,png',
+                'title' => 'required|string|max:200',
+                'subtitle' => 'nullable|string|max:200',
+                'description' => 'required',
+                'tags' => 'required',
+                'meta_title' => 'nullable|string|max:200',
+                'meta_description' => 'nullable|string',
+                'meta_keyword' => 'nullable|string',
+                'publish_date' => 'required',
+            ];
+        };
 
-            'meta_title' => [
-                'nullable',
-                'string',
-                'max:200',
-            ],
+        return $rules;
 
-            'meta_description' => [
-                'nullable',
-                'string',
-            ],
+        
+        // $rules = [
+        //     'title' => [
+        //         'required',
+        //         'string',
+        //         'max:200',
+        //     ],
 
-            'meta_keyword' => [
-                'nullable',
-                'string',
-            ],
+        //     'subtitle' => [
+        //         'nullable',
+        //         'string',
+        //         'max:200',
+        //     ],
 
-            'publish_date' => [
-                'required',
-            ],
+        //     'description' => [
+        //         'required',
+        //     ],
+        //     'tags' => [
+        //         'required'
+        //     ],
 
-        ];
+        //     'meta_title' => [
+        //         'nullable',
+        //         'string',
+        //         'max:200',
+        //     ],
+
+        //     'meta_description' => [
+        //         'nullable',
+        //         'string',
+        //     ],
+
+        //     'meta_keyword' => [
+        //         'nullable',
+        //         'string',
+        //     ],
+
+        //     'publish_date' => [
+        //         'required',
+        //     ],
+
+        // ];
 
         // $requestType = $this->input('request_type');
 
@@ -80,27 +114,6 @@ class NewsFormRequest extends FormRequest
         //     ];
         // };
 
-        $requestType = $this->input('request_type');
-
-        if ($requestType === 'create') {
-
-            $rules = [
-                'name' => 'required|unique:project|string|max:200',
-                'image' => 'required|mimes:jpeg,jpg,png',
-                'description' => 'required',
-                'coordinator' => 'required|string|max:400',
-            ];
-        }
-        else
-        {
-            $rules = [
-                'name' => 'required|string|max:200',
-                'image' => 'mimes:jpeg,jpg,png',
-                'description' => 'required',
-                'coordinator' => 'required|string|max:400',
-            ];
-        };
-
-        return $rules;
+        
     }
 }

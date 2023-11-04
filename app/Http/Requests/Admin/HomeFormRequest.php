@@ -13,7 +13,7 @@ class HomeFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -41,7 +41,14 @@ class HomeFormRequest extends FormRequest
         else
         {
             $rules = [
+                'heading' => 'string|max:200',
+                'subheading' => 'string|max:200',
+                'video_url' => 'string',
+                'served_number' => 'number',
+                'served_description' => 'string|max:200',
                 'image' => 'mimes:jpeg,jpg,png,avif,webp',
+                'meta_title' => 'nullable|string',
+                'meta_description' => 'nullable|string',
             ];
         };
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\HomeFormRequest;
 use App\Models\Home;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -17,14 +18,16 @@ class HomeController extends Controller
 
     public function create()
     {
-        return view('admin.pages.home');
+        $home = Home::find(1);
+        return view('admin.pages.home', compact('home'));
     }
 
     public function store(HomeFormRequest $request)
     {
+        // dd($request->all());
         $data = $request->validated();
 
-        $home = new Home();
+        $home = Home::find(1);
         $home->heading = $data['heading'];
         $home->subheading = $data['subheading'];
         $home->video_url = $data['video_url'];
@@ -35,11 +38,11 @@ class HomeController extends Controller
 
         if ($request->hasfile('image')) {
             $file = $request->file('image');
-            $filename = $file->store('/public/home/');
+            $filename = $file->store('/public/pages/home/');
             $home->image = $filename;
         }
 
-        $home->save();
+        $home->update();
 
         return redirect('admin/all-home')->with('message', 'Home Added Successfully');
     }

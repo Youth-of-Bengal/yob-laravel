@@ -28,14 +28,9 @@ class NewsController extends Controller
         return view('admin.news.create', compact('categories'));
     }
 
-    // public function store(NewsFormRequest $request)
-    // {
-        
-    //     return response()->json($categories);
-    // }
-
     public function store(NewsFormRequest $request)
     {
+        // dd($request->all());
         $data = $request->validated();
 
         $news = new News;
@@ -93,7 +88,10 @@ class NewsController extends Controller
     {
         $news = News::find($news_id);
         $categories=Category::all();
-        return view('admin.news.edit', compact('news', 'categories'));
+        $news_ids = $news->categories->pluck('id');
+        $selected_news_ids = $news_ids->toArray();
+        // print_r($selected_news_ids->toArray()); die;
+        return view('admin.news.edit', compact('news', 'categories','selected_news_ids'));
     }
 
     public function update(NewsFormRequest $request, $news_id)
@@ -101,9 +99,9 @@ class NewsController extends Controller
         $data = $request->validated();
 
         $news = News :: find($news_id);
-        $news->name = $data['name'];
-        // $news->slug = $data['slug'];
-        $news->slug = Str::slug($data['name']);
+        $news->title = $data['title'];
+        $news->subtitle = $data['subtitle'];
+        $news->slug = Str::slug($data['title']);
         $news->description = $data['description'];
 
         if ($request->hasfile('image')) {

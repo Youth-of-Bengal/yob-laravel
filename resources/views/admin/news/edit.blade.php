@@ -30,12 +30,12 @@
                     @method('PUT')
                     <div class="mb-3">
                         <label>Title <span class="text-danger fw-bold">*</span></label>
-                        <input type="text" name="name" value="{{ $news->title }}" class="form-control" />
+                        <input type="text" name="title" value="{{ $news->title }}" class="form-control" />
                     </div>
 
                     <div class="mb-3">
                         <label>SubTitle <span class="text-danger fw-bold">*</span></label>
-                        <input type="text" name="coordinator" value="{{ $news->subtitle }}" class="form-control" />
+                        <input type="text" name="subtitle" value="{{ $news->subtitle }}" class="form-control" />
                     </div>
 
                     <div class="mb-3 d-flex flex-column">
@@ -49,32 +49,37 @@
 
                     <div class="mb-3">
                         <label>Description <span class="text-danger fw-bold">*</span></label>
-                        <textarea name="description" rows="5" class="form-control" style="resize:none;">{{ $news->description }}</textarea>
+                        <textarea name="description" id="newsEditor" rows="5" class="form-control" style="resize:none;">{{ $news->description }}</textarea>
                     </div>
 
                     <div class="mb-3">
                         <label>Categories (Max: 5) <span class="text-danger fw-bold">*</span></label>
                         <select class="categories form-control" name="tags[]" multiple="multiple">
                             @foreach ($categories as $item)
-                                <option vlaue="{{ $item->id }}">{{ $item->name }}</option>
+                                <option value="{{ $item->id }}" {{ in_array($item->id, $selected_news_ids) ? 'selected' : '' }}>{{ $item->name }}</option>
                             @endforeach
                         </select>
                     </div>
 
-
+                    <h6>SEO Tags</h6>
                     <div class="mb-3">
                         <label>meta title <span class="text-danger fw-bold">*</span></label>
-                        <input type="text" name="name" value="{{ $news->meta_title }}" class="form-control" />
+                        <input type="text" name="meta_title" value="{{ $news->meta_title }}" class="form-control" />
                     </div>
 
                     <div class="mb-3">
                         <label>meta description <span class="text-danger fw-bold">*</span></label>
-                        <textarea id="newsEditor" name="description" rows="5" class="form-control" style="resize:none;">{{ $news->meta_description }}</textarea>
+                        <textarea name="meta_description" rows="5" class="form-control" style="resize:none;">{{ $news->meta_description }}</textarea>
                     </div>
 
                     <div class="mb-3">
                         <label>meta keyword <span class="text-danger fw-bold">*</span></label>
-                        <input type="text" name="name" value="{{ $news->meta_keyword }}" class="form-control" />
+                        <input type="text" name="meta_keyword" value="{{ $news->meta_keyword }}" class="form-control"/>
+                    </div>
+
+                    <div class="mb-3" data-provide="datepicker">
+                        <label>Publish Date <span class="text-danger fw-bold">*</span></label>
+                        <input type="datetime-local" class="form-control" name="publish_date" value="{{ $news->publish_date }}">
                     </div>
 
                     <div class="col-md-6">
@@ -97,6 +102,7 @@
 
 @section('scripts')
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/flatpickr') }}"></script>
     <script src="{{ asset('assets/js/ckeditor.js') }}"></script>
 
     <script type="text/javascript">
@@ -111,6 +117,12 @@
                 newImg.style.display = "flex"
             }
         }
+
+        config = {
+            enableTime: true,
+            dateFormat: 'Y-m-d H:i:s',
+        }
+        flatpickr("input[type=datetime-local]");
 
         // CK EDITOR INTERFACE IS NOT SHOWING: NEEDS TO BE FIXED
         ClassicEditor.create(document.querySelector('#newsEditor'), {

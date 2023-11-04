@@ -33,8 +33,11 @@ class LoginController extends Controller
         if (Auth::user()->role_as == '1') {
             return redirect('admin/dashboard')->with('status','Welcome to Admin Dashboard');
         }
+        else if (Auth::user()->role_as == '2') {
+            return redirect('/member/dashboard')->with('status','Welcome to Member Dashboard')->with('customClass', 'alert-success');
+        }
         else if (Auth::user()->role_as == '0') {
-            return redirect('/home')->with('status','Logged in Successfully')->with('customClass', 'alert-success');
+            return redirect('/user/dashboard')->with('status','Welcome to User Dashboard')->with('customClass', 'alert-success');
         }
         else {
             return redirect('/');

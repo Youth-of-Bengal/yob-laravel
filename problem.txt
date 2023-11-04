@@ -1,0 +1,71 @@
+ADMIN:
+News-ii) news add and edit (description space problem)
+     ii) preselected publish_date is not showing in edit news
+     iii) single image delete error in album
+     iv)home error- Undefined index:subheading
+     v) Contact page is not showing
+     vi) description edit error....Undefined index
+
+USER:
+i) member auth
+ii) alert messages not showing in right place contact page
+iii) email validation, remember me while login
+
+member auth:
+1)User:
+
+2)Member: 
+	i) member_id,
+ 	ii) user_id 
+	iii) reference_user_id, 
+	iv) Address*, 
+	v) Phone*, 
+	vi) Blood gr*, 
+	vii) Photo*, 
+	viii) Id proof*, 
+	ix) DOB(Age), 
+	x) Height, 
+	xi) Weight, 
+	xii) Known disease, 
+	xiii) is_active, 
+	xiv) is_member, 
+	xv) payment_status, 
+	xvi) membership_start_date, 
+	xvii) membership_end_date,
+
+3)Payment history: 
+	i)payment_id, 
+	ii)user_id, 
+	iii)transaction_id, 
+	iv)payment_type, 
+	v)transaction_status, 
+	vi)date
+
+4)Member payment details: 
+	i)member_id, 
+	ii)payment_id, 
+	iii)subscription_id, 
+
+$table->bigInteger('student_id')->unsigned()->index()->nullable();
+        $table->foreign('student_id')->references('id')->on('student')->onDelete('cascade');
+
+$table->string('height')->nullable();
+$table->tinyInteger('status')->default('1');
+
+About:
+i) Description
+ii) Departments
+iii) Team : name, image, job, social, role
+
+member form:
+1) Name*,
+2) Email* 
+3) Phone*,
+4) Address*, 
+5) Blood gr*,
+6) Photo*,
+7) Id proof*,
+8) DOB(Age),
+9) Height,
+10) Weight,
+11) Known disease

@@ -6,16 +6,41 @@ use App\Http\Controllers\Admin\DashboardContoller;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\AlbumController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\HomeController;
-
+use App\Http\Controllers\Admin\DescriptionController;
+use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Frontend\FrontNewsController;
+use App\Http\Controllers\Frontend\FrontHomeController;
+use App\Http\Controllers\Frontend\FrontProjectController;
+use App\Http\Controllers\Frontend\FrontGalleryController;
+use App\Http\Controllers\Frontend\FrontNews_SingleController;
+use App\Http\Controllers\Frontend\FrontContactController;
+use App\Http\Controllers\Frontend\FrontMemberController;
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/logout', [DashboardContoller:: class, 'logout'])->name('logout2');
 
-Route::get('/', [App\Http\Controllers\Frontend\FrontHomeController::class, 'index']);
+// User..
+Route::get('/', [FrontHomeController::class, 'index']);
+Route::get('/projects', [FrontProjectController::class, 'index']);
+Route::get('/gallery', [FrontGalleryController::class, 'index']);
+Route::get('/album/{album_id}', [FrontGalleryController::class, 'index']);
+Route::get('/news', [FrontNewsController::class, 'index']);
+Route::get('/news/{news_id?}', [FrontNews_SingleController::class, 'show']);
+Route::get('/contact', [FrontContactController::class, 'index']);
+Route::post('/contact/store', [FrontContactController::class, 'store']);
+Route::get('/member', [FrontMemberController::class, 'index']);
+Route::post('member/store', [FrontMemberController::class, 'store']);
+Route::get('/member/dashboard', [MemberController::class, 'index']);
+Route::get('/user/dashboard', [UserController::class, 'index']);
 
+// Admin..
 Route::prefix('admin')->middleware(['auth','isAdmin'])->namespace('Admin')->group(function(){
     Route::get('/dashboard', [DashboardContoller:: class, 'index']);
     Route::get('/category', [CategoryController:: class, 'index']);
@@ -50,5 +75,19 @@ Route::prefix('admin')->middleware(['auth','isAdmin'])->namespace('Admin')->grou
     Route::get('delete-project/{project_id}', [ProjectController:: class, 'destroy']);
 
     Route::get('/pages/home', [HomeController:: class, 'create']);
+    Route::post('/pages/home/store', [HomeController:: class, 'store']);
+    
+    Route::get('/pages/contact', [ContactController:: class, 'update']);
+    Route::post('/pages/contact/store', [ContactController:: class, 'store']);
+
+    Route::get('/about/description', [DescriptionController:: class, 'index']);
+    Route::post('/about/description/edit', [DescriptionController:: class, 'update']);
+
+    Route::get('about/departments', [DepartmentController:: class, 'index']);
+    Route::get('about/add-department', [DepartmentController:: class, 'create']);
+    Route::post('about/add-department', [DepartmentController:: class, 'store']);
+    Route::get('about/edit-department/{department_id}', [DepartmentController:: class, 'edit']);
+    Route::put('about/update-department/{department_id}', [DepartmentController:: class, 'update']);
+    Route::get('about/delete-department/{department_id}', [DepartmentController:: class, 'destroy']);
 
 });

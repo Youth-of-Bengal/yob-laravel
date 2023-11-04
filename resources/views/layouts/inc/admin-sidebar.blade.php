@@ -3,7 +3,7 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">Core</div>
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/admin/dashboard">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Dashboard
                 </a>
@@ -51,7 +51,7 @@
 
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProject"
                     aria-expanded="false" aria-controls="collapseProject">
-                    <div class="sb-nav-link-icon"><i class="fa-regular fa-rectangle-list"></i></i></div>
+                    <div class="sb-nav-link-icon"><i class="fa-regular fa-rectangle-list"></i></div>
                     Project
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
@@ -65,7 +65,7 @@
 
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                     aria-expanded="false" aria-controls="collapsePages">
-                    <div class="sb-nav-link-icon"><i class="fa-regular fa-rectangle-list"></i></i></div>
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-file-arrow-up"></i></div>
                     Pages
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
@@ -73,14 +73,32 @@
                     data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="{{ url('admin/pages/home') }}">Home</a>
-                        <a class="nav-link" href="{{ url('admin/about') }}">About</a>
-                        <a class="nav-link" href="{{ url('admin/project') }}">Project</a>
-                        <a class="nav-link" href="{{ url('admin/gallery') }}">Gallery</a>
-                        <a class="nav-link" href="{{ url('admin/news') }}">News</a>
-                        <a class="nav-link" href="{{ url('admin/contact') }}">Contact</a>
+                        {{-- <a class="nav-link" href="{{ url('admin/about') }}">About</a> --}}
+                        <a class="nav-link" href="{{ url('admin/pages/contact') }}">Contact</a>
                     </nav>
                 </div>
 
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAbout"
+                    aria-expanded="false" aria-controls="collapseAbout">
+                    <div class="sb-nav-link-icon"><i class="fa-regular fa-address-card"></i></div>
+                    About
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseAbout" aria-labelledby="headingTwo"
+                    data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="{{ url('admin/about/description') }}">Description</a>
+                        <a class="nav-link" href="{{ url('admin/about/departments') }}">Departments</a>
+                        <a class="nav-link" href="{{ url('admin/about/team') }}">Team</a>
+                    </nav>
+                </div>
+
+                <a class="nav-link" href="{{ url('admin/user_contact_details') }}">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-circle-info"></i></div>
+                    User Contact Details
+                </a>
+
+                
                 {{-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                     aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>

@@ -23,14 +23,21 @@ class CategoryFormRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'name' => [
-                'required',
-                'string',
-                'max:200',
-            ],
+        $requestType = $this->input('request_type');
 
-        ];
+        if ($requestType === 'create') {
+
+            $rules = [
+                'name' => 'required|unique:categories|string|max:200',
+            ];
+        }
+        else
+        {
+            $rules = [
+                'name' => 'required|string|max:200',
+            ];
+        };
+
         return $rules;
     }
 }

@@ -32,6 +32,10 @@
 <body>
 
     @include('frontend.component.frontend-navbar')
+    
+    <main>
+        @yield('content')
+    </main>
 
     @include('frontend.component.frontend-footer')
 
@@ -45,6 +49,7 @@
         </svg>
     </div>
 
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-migrate-3.0.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>

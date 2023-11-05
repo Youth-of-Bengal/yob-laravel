@@ -63,42 +63,40 @@
                     </nav>
                 </div>
 
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-                    aria-expanded="false" aria-controls="collapsePages">
-                    <div class="sb-nav-link-icon"><i class="fa-solid fa-file-arrow-up"></i></div>
-                    Pages
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
-                    data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{ url('admin/pages/home') }}">Home</a>
-                        {{-- <a class="nav-link" href="{{ url('admin/about') }}">About</a> --}}
-                        <a class="nav-link" href="{{ url('admin/pages/contact') }}">Contact</a>
-                    </nav>
-                </div>
-
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAbout"
-                    aria-expanded="false" aria-controls="collapseAbout">
-                    <div class="sb-nav-link-icon"><i class="fa-regular fa-address-card"></i></div>
-                    About
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapseAbout" aria-labelledby="headingTwo"
-                    data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="{{ url('admin/about/description') }}">Description</a>
-                        <a class="nav-link" href="{{ url('admin/about/departments') }}">Departments</a>
-                        <a class="nav-link" href="{{ url('admin/about/team') }}">Team</a>
-                    </nav>
-                </div>
-
                 <a class="nav-link" href="{{ url('admin/user_contact_details') }}">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-circle-info"></i></div>
                     User Contact Details
                 </a>
 
-                
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
+                aria-expanded="false" aria-controls="collapsePages">
+                <div class="sb-nav-link-icon"><i class="fa-solid fa-file-arrow-up"></i></div>
+                Pages
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
+                data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ url('admin/pages/home/1') }}">Home</a>
+                    {{-- <a class="nav-link" href="{{ url('admin/about') }}">About</a> --}}
+                    <a class="nav-link" href="{{ url('admin/pages/contact/1') }}">Contact</a>
+                </nav>
+            </div>
+
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAbout"
+                aria-expanded="false" aria-controls="collapseAbout">
+                <div class="sb-nav-link-icon"><i class="fa-regular fa-address-card"></i></div>
+                About
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapseAbout" aria-labelledby="headingTwo"
+                data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav">
+                    <a class="nav-link" href="{{ url('admin/about/description/1') }}">Description</a>
+                    <a class="nav-link" href="{{ url('admin/about/departments') }}">Departments</a>
+                    <a class="nav-link" href="{{ url('admin/about/team') }}">Team</a>
+                </nav>
+            </div>
                 {{-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                     aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
@@ -139,7 +137,7 @@
                     </nav>
                 </div> --}}
 
-                <div class="sb-sidenav-menu-heading">Addons</div>
+                {{-- <div class="sb-sidenav-menu-heading">Addons</div>
                 <a class="nav-link" href="charts.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                     Charts
@@ -147,12 +145,12 @@
                 <a class="nav-link" href="tables.html">
                     <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                     Tables
-                </a>
+                </a> --}}
             </div>
         </div>
-        <div class="sb-sidenav-footer">
+        {{-- <div class="sb-sidenav-footer">
             <div class="small">Logged in as:</div>
             Start Bootstrap
-        </div>
+        </div> --}}
     </nav>
 </div>

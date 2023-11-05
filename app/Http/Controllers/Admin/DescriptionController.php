@@ -29,6 +29,6 @@ class DescriptionController extends Controller
 
         $description->update();
 
-        return redirect('admin/about/description')->with('message', 'Updated Successfully');
+        return redirect('admin/about/description/1')->with('message', 'Updated Successfully');
     }
 }

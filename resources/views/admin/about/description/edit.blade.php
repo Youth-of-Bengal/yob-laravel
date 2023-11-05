@@ -28,7 +28,7 @@
                 <div class="alert alert-success" id="alertMessage">{{ session('message') }}</div>
                 @endif
 
-                <form action="{{ url('admin/about/description/edit') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('admin/about/description/update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label>Description <span class="text-danger fw-bold">*</span></label>

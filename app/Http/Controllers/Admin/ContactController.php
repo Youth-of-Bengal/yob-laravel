@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+    public function index($id)
+    {
+        $contact = Contact::find(1);
+        return view('admin.pages.contact', compact('contact'));
+    }
     public function update(ContactFormRequest $request)
     {
         $data = $request->validated();
@@ -20,7 +25,7 @@ class ContactController extends Controller
         $contact->map_url = $data['map_url'];
 
         $contact->update();
-        return redirect('admin.pages.contact', compact('contact'));
+        return redirect('admin/pages/contact/1')->with('message', 'Contact data updated successfully');
     }
 
 }

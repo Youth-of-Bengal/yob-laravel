@@ -19,7 +19,6 @@ class FrontContactController extends Controller
 
     public function store(UserContactFormRequest $request)
     {
-        dd(12345);
         $data = $request->validated();
         
         $contact = new UserContact();

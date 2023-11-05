@@ -10,19 +10,15 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    // public function index()
-    // {
-    //     $projects = Home::all();
-    //     return view('admin.home.index', compact('projects'));
-    // }
+    
 
-    public function create()
+    public function index($id)
     {
         $home = Home::find(1);
         return view('admin.pages.home', compact('home'));
     }
 
-    public function store(HomeFormRequest $request)
+    public function update(HomeFormRequest $request)
     {
         // dd($request->all());
         $data = $request->validated();
@@ -44,6 +40,6 @@ class HomeController extends Controller
 
         $home->update();
 
-        return redirect('admin/all-home')->with('message', 'Home Added Successfully');
+        return redirect('admin/pages/home/1')->with('message', 'Home data updated successfully');
     }
 }

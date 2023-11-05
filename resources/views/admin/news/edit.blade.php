@@ -79,7 +79,7 @@
 
                     <div class="mb-3" data-provide="datepicker">
                         <label>Publish Date <span class="text-danger fw-bold">*</span></label>
-                        <input type="datetime-local" class="form-control" name="publish_date" value="{{ $news->publish_date }}">
+                        <input type="datetime-local" class="form-control" publish-date="{{ $news->publish_date }}" name="publish_date" value="{{ date('yyyy-MM-ddThh:mm', strtotime($news->publish_date)) }}">
                     </div>
 
                     <div class="col-md-6">
@@ -144,5 +144,7 @@
             $('.categories').val(data);
             $('.categories').trigger('change');
         })
+
+        $('.flatpickr-input').val('2022-02-06')
     </script>
 @endsection

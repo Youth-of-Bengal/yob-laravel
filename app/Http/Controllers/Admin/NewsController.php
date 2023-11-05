@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Ui\Presets\React;
 
 class NewsController extends Controller
 {
@@ -28,11 +29,11 @@ class NewsController extends Controller
         return view('admin.news.create', compact('categories'));
     }
 
-    public function store(NewsFormRequest $request)
+    public function store(Request $request)
     {
         // dd($request->all());
-        $data = $request->validated();
-
+        $data = $request->all();
+        dd($data);
         $news = new News;
         $news->title = $data['title'];
         $news->subtitle = $data['subtitle'];

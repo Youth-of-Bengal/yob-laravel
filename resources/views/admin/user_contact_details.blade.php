@@ -23,34 +23,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($news as $item)
+                        @foreach ($user_contacts as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->title }}</td>                               
-                                <td>{{ $item->created_at }}</td>                                
-
-                                <div class="modal fade" id="deleteModal{{ $item->id }}" tabindex="-1"
-                                    aria-labelledby="deleteModalLabel{{ $item->id }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="deleteModalLabel{{ $item->id }}">Confirm
-                                                    Deletion</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to delete this news?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cancel</button>
-                                                <a href="{{ url('admin/delete-news/' . $item->id) }}"
-                                                    class="btn btn-danger">Delete</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <td>{{ $item->name }}</td>                               
+                                <td>{{ $item->email }}</td>                                
+                                <td>{{ $item->phone_no }}</td>                                
+                                <td>{{ $item->message }}</td>                                
                             </tr>
                         @endforeach
                     </tbody>

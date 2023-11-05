@@ -36,7 +36,7 @@
                                     <img src="{{ URL::to('/') }}{{ Illuminate\Support\Facades\Storage::url($item->image) }}"
                                         width="50px" height="50px" alt="{{ $item->title }}">
                                 </td>
-                                <td>{{ $item->created_at }}</td>
+                                <td>{{ date('d-m-Y', strtotime($item->created_at)) }}</td>;
                                 <td>{{ $item->is_draft == true ? 'Draft' : 'Published' }}</td>
                                 <td>
                                     @foreach ($item->categories as $category)

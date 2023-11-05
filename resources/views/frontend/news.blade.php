@@ -6,7 +6,7 @@
     <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
       <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
         <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a
-              href="index.html">Home</a></span> <span>News</span></p>
+              href="/">Home</a></span>/ <span>News</span></p>
         <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">News</h1>
       </div>
     </div>
@@ -22,12 +22,10 @@
           <a href="{{ url('news/' . $news->id) }}" class="block-20" style="background-image: url({{ URL::to('/')}}{{ Illuminate\Support\Facades\Storage::url($news->image) }});">
           </a>
           <div class="text p-4 d-block">
-            <div class="meta mb-3">
-              <div><a href="#">{{ $news->publish_date }}</a></div>
-              <div><a href="#">Admin</a></div>
-              <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+            <div class="meta mb-1">
+              <div><a href="{{ url('news/' . $news->id) }}">{{ $news->publish_date }}</a></div>
             </div>
-            <h3 class="heading mt-3"><a href="#">{{ $news->title }}</a></h3>
+            <h3 class="heading mt-1"><a href="{{ url('news/' . $news->id) }}">{{ $news->title }}</a></h3>
             {{-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> --}}
           </div>
         </div>

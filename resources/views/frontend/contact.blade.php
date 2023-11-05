@@ -6,7 +6,7 @@
     <div class="container">
       <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
         <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-           <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Contact</span></p>
+           <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/">Home</a></span>/ <span>Contact</span></p>
           <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Contact Us</h1>
         </div>
       </div>
@@ -22,16 +22,16 @@
         </div>
         <div class="w-100"></div>
         <div class="col-md-3">
-          <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+          <p><span>Address:</span> {{$contact[0]->address}}</p>
         </div>
         <div class="col-md-3">
-          <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+          <p><span>Phone:</span> <a href="tel:91{{$contact[0]->phone_no}}">+91 {{$contact[0]->phone_no}}</a></p>
         </div>
         <div class="col-md-3">
-          <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+          <p><span>Email:</span> <a href="mailto:{{$contact[0]->email}}">{{$contact[0]->email}}</a></p>
         </div>
         <div class="col-md-3">
-          <p><span>Website</span> <a href="#">yoursite.com</a></p>
+          <p><span>Website</span> <a href="/">www.youthofbengal.org</a></p>
         </div>
       </div>
       
@@ -68,7 +68,9 @@
         
         </div>
 
-        <div class="col-md-6" id="map"></div>
+        <div class="col-md-6" id="map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.436149607599!2d88.36311330979704!3d23.408606878817007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f91dde50a73607%3A0xa282b19af9a2415d!2sInstitute%20of%20Geography%20learning!5e0!3m2!1sen!2sin!4v1699150813913!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
     </div>
   </section>

@@ -16,11 +16,8 @@
                     </div>
                 @endif
 
-                <form action="{{ url('admin/pages/contact/store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('admin/pages/contact/update') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @php
-                        dd($contact);
-                    @endphp
                     <input type="hidden" name="request_type" value="create">
                     <div class="mb-3">
                         <label>Address <span class="text-danger fw-bold">*</span></label>

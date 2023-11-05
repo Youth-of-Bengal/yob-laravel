@@ -1,35 +1,44 @@
 @extends('layouts.frontend.master')
 
 
-<div class="hero-wrap" style="background-image: url({{url('assets/images/bg_7.jpg')}});" data-stellar-background-ratio="0.5">
+<div class="hero-wrap" style="background-image: url({{ url('assets/images/bg_7.jpg') }});"
+    data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
-      <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
-        <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-           <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span class="mr-2"><a href="blog.html">News</a></span> <span>News Details</span></p>
-          <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">News Details</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <section class="ftco-section ftco-degree-bg">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 ftco-animate">
-          <h2 class="mb-3">{{ $news->title }}</h2>
-          <p>{{ $news->description }}</p>
-        
-          <div class="tag-widget post-tag-container mb-5 mt-5">
-            <div class="tagcloud">
-              <a href="#" class="tag-cloud-link">Life</a>
-              <a href="#" class="tag-cloud-link">Sport</a>
-              <a href="#" class="tag-cloud-link">Tech</a>
-              <a href="#" class="tag-cloud-link">Travel</a>
+        <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+            <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span
+                        class="mr-2"><a href="/">Home</a></span>/ <span class="mr-2"><a
+                            href="/news">News</a></span>/ <span>News Details</span></p>
+                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">News Details</h1>
             </div>
-          </div>
-          
-          <div class="about-author d-flex p-5 bg-light">
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section ftco-degree-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ftco-animate text-justify">
+                <h2 class="mb-5 text-center">{{ $news->title }}</h2>
+                <div class="d-flex justify-content-center">
+                    <img class="mb-4"
+                        src="{{ URL::to('/') }}{{ Illuminate\Support\Facades\Storage::url($news->image) }}"
+                        style="width:70vw; height:auto;" alt="{{ $news->title }}">
+                </div>
+                {!! $news->description !!}
+
+                <div class="tag-widget post-tag-container mb-5 mt-5">
+                  <h4 class="mb-2">TAGS:</h4>
+                    <div class="tagcloud">
+                        @foreach ($news->categories as $category)
+                        {{-- <a href="/category/{{$category->id}}" class="tag-cloud-link">{{ $category->name }}</a> --}}
+                        <small class="p-1 border border-warning rounded" style="max-width: fit-content;">{{ $category->name }}</small>
+                        @endforeach
+                    </div>
+                </div>
+
+                {{-- <div class="about-author d-flex p-5 bg-light">
             <div class="bio align-self-md-center mr-5">
               <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
             </div>
@@ -37,11 +46,11 @@
               <h3>Lance Smith</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
             </div>
-          </div>
+          </div> --}}
 
 
-        </div> <!-- .col-md-8 -->
-        <div class="col-md-4 sidebar ftco-animate">
+            </div> <!-- .col-md-8 -->
+            {{-- <div class="col-md-4 sidebar ftco-animate">
           <div class="sidebar-box">
             <form action="#" class="search-form">
               <div class="form-group">
@@ -93,11 +102,8 @@
             <h3>Paragraph</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
           </div>
+        </div> --}}
+
         </div>
-
-      </div>
     </div>
-  </section> <!-- .section -->
-
-
-
+</section> <!-- .section -->

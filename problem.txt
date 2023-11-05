@@ -2,9 +2,10 @@ ADMIN:
 News-ii) news add and edit (description space problem)
      ii) preselected publish_date is not showing in edit news
      iii) single image delete error in album
-     iv)home error- Undefined index:subheading
+     iv) **home error**
      v) Contact page is not showing
      vi) description edit error....Undefined index
+     vi) **user contact details show**
 
 USER:
 i) member auth
@@ -69,3 +70,7 @@ member form:
 9) Height,
 10) Weight,
 11) Known disease
+
+
+
+

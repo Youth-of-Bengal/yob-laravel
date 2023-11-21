@@ -42,7 +42,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title text-center">{{ $member->name }}</h5>
                     <h6 class="text-center text-warning">{{ $member->ngo_role }}</h6>
-                    <p class="card-text text-left text-center">{{ $member->profession }}</p>
+                    <p class="card-text text-left text-center">{!! $member->profession !!}</p>
                     <a target="_blank" href="{{ $member->social_link }}" class="btn btn-warning text-right">More
                         info</a>
                 </div>

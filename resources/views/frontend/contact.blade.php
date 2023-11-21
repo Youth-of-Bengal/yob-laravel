@@ -69,7 +69,8 @@
         </div>
 
         <div class="col-md-6" id="map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.436149607599!2d88.36311330979704!3d23.408606878817007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f91dde50a73607%3A0xa282b19af9a2415d!2sInstitute%20of%20Geography%20learning!5e0!3m2!1sen!2sin!4v1699150813913!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          {{-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.436149607599!2d88.36311330979704!3d23.408606878817007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f91dde50a73607%3A0xa282b19af9a2415d!2sInstitute%20of%20Geography%20learning!5e0!3m2!1sen!2sin!4v1699150813913!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> --}}
+          <img src="https://imgs.search.brave.com/_toEnRmRzNzqPQ5GdYMKKWQh32PGlzPkS4TN-3PHZjc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9idXJz/dC5zaG9waWZ5Y2Ru/LmNvbS9waG90b3Mv/Y29udGFjdC11cy1p/bWFnZS5qcGc_d2lk/dGg9MTAwMCZmb3Jt/YXQ9cGpwZyZleGlm/PTAmaXB0Yz0w" alt="contact-us" width="500px" height="300px" style="object-fit: cover">
         </div>
       </div>
     </div>

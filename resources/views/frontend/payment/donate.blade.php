@@ -53,7 +53,7 @@
         </div> --}}
 
         {{-- <button type="submit" class="btn btn-primary btn-block">Submit</button> --}}
-        <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_MwsasSoC48rJil" async> </script> </form>
+        <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_MwstHQoGOtYHJU" async> </script> </form>
     </div>
 
     @include('frontend.component.frontend-footer')
